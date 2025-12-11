@@ -144,7 +144,7 @@ inc_ineq_data <- mget(ls(pattern = "inc_ineq_"), .GlobalEnv) %>% # gets the data
   do.call(rbind.data.frame, .)  # rbinds them all together
 write_rds(inc_ineq_data, here("results", "inc_ineq_data.rds"))
 
-# fiscal
+# equiv_inc
 equiv_inc_data <- mget(ls(pattern = "equiv_inc_"), .GlobalEnv) %>% # gets the dataframes starting with equiv_inc__
   do.call(rbind.data.frame, .)  # rbinds them all together
 write_rds(equiv_inc_data, here("results", "equiv_inc_data.rds"))
@@ -209,7 +209,7 @@ calc_equiv_income <- function(filename) {
   
   # Read in the UKMOD output file (.txt) (one file for each scenario modelled, with a row for each FRS respondent)
   # Sum taxes and benefits under that scenario 
-  file <- read.delim(filename, stringsAsFactors = FALSE, quote = "", sep = "\t") %>% 
+  file <- read.delim(here("ukmod output", filename), stringsAsFactors = FALSE, quote = "", sep = "\t") %>% 
     #sum total tax and national insurance contributions (employee, self-employed, employer, and credit contributions)
     mutate(tax_sic = 
              ils_tax + #income tax amount
@@ -263,7 +263,7 @@ calc_equiv_income <- function(filename) {
 
 # Get the names of the output files to be processed:
 # Set up the 'all.files' object to contain all the .txt filenames in the data directory
-all.files <- list.files(pattern = "*.txt$", rec=F)
+all.files <- list.files(here("ukmod output"), pattern = "*.txt$", rec=F)
 # Then loop through each of the files in 'all.files' to save as .rds files and calc equiv income
 sapply(all.files, calc_equiv_income)
 
@@ -605,9 +605,7 @@ model_data_by_simd_and_sex <- pop_deaths_simd10  %>%
   rename(pop_nrs = pop,
          deaths_nrs = deaths) %>%
   merge(y=all_scenarios, by.x="simd10", by.y="simd10", all=T) %>% # N.B. this makes a complete copy of all rows for each scenario with RR data
-  mutate(deaths_scenario = (deaths_nrs * rr)) #%>%
- # mutate(deaths_scenario = case_when(agegp20_LE %in% c(1:4) ~ deaths_nrs,
-  #                                   TRUE ~ deaths_scenario)) 
+  mutate(deaths_scenario = (deaths_nrs * rr)) 
 
 
 # Calculate aggregated figures and merge back in
@@ -634,7 +632,6 @@ model_data_agg_simd10sex <- model_data_by_simd_and_sex %>%
          sex = "both",
          simd10 = 125)
 model_data_all_simd10 <- model_data_by_simd_and_sex %>%
-#  select(-deaths_scenario) %>%
   bind_rows(model_data_agg_sex,
             model_data_agg_simd10,
             model_data_agg_simd10sex) %>%
@@ -956,3 +953,5 @@ scenario_inequals_summary %>%
 # The model estimates this would increase life exp in the most deprived SIMD decile by 0.2y for females and 0.1y for males.
 # The table shows that this would narrow inequalities in life expectancy slightly, 
 # although the gap between the most and least deprived deciles would still be over 9 years for females, and over 12 years for males. 
+
+## END

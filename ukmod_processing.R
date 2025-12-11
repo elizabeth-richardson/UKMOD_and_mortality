@@ -1,10 +1,28 @@
+
+######################################################
 # Script to facilitate working with UKMOD outputs.
-# It covers:
+######################################################
+
+
+# Author Liz Richardson, December 2025
+# Github repo https://github.com/elizabeth-richardson/UKMOD_and_mortality
+
+
+# The script includes an approach for estimating population-wide mortality impacts of income changes. 
+
+# This script covers:
 # Running the UKMOD systems (requires EUROMOD and UKMOD)
 # Importing and processing UKMOD results files (fiscal, poverty and income inequality stats)
 # Getting SIMD deciles for the FRS households
-# Equivalising the incomes for UKMOD results files
-# 
+# Equivalising the household incomes for UKMOD results files
+# Assigning households to SIMD deciles and income deciles
+# Producing aggregate summary tables of income distribution
+# Estimating a cross-sectional relationship between income and mortality
+# Estimate death rates and deaths for each scenario (based on the change in income for each SIMD decile)
+# Calculate life expectancy and premature mortality rate for each scenario
+# Calculate health inequalities.
+
+
 
 ###############################
 # PACKAGES

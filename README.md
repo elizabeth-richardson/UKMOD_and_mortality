@@ -20,7 +20,7 @@ This code provides an example of how output files from the tax-benefit microsimu
 8. Equivalise disposable incomes (before housing costs) for each household.
 9. Assign households to income quintiles and deciles (using FRS weights).
 10. Produce summary tables of income distribution, by income quantiles and SIMD quantiles.
-11. Estimate the cross-sectional relationship between household income and standardised mortality rates (using data for SIMD deciles). This step is required in the absence of empirical quantification of the longitudinal relationship between income and mortality, which would be more appropriate.
+11. Estimate the cross-sectional relationship between household income and standardised mortality rates (using data for SIMD deciles). This step is required in the absence of empirical quantification of the longitudinal relationship between income and mortality, which would be more appropriate. It should also be noted that the model currently doesn't include any covariates that could be important (e.g., education, employment, etc) so represents an overall effect.
 12. Use the income-mortality relationship to estimate death rates and deaths by age group and sex for each scenario.
 13. Calculate life expectancy for each scenario
 14. Calculate premature mortality rate for each scenario

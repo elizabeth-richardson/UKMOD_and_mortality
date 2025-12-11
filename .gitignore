@@ -9,6 +9,14 @@
 # User-specific files
 .Ruserdata
 
+# Data and plots
+*.csv
+*.rds
+*.txt
+*.dta
+*.parquet
+*.png
+
 # Example code in package build process
 *-Ex.R
 
